@@ -1,3 +1,4 @@
 libs/
 apps/
-vs2019/
+.vs/
+Debug_x32/
