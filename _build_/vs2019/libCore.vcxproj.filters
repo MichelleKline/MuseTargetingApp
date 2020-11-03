@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\libs\libCore\libCore.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Constants.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\CoreExceptions.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Image.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\STLTools.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Tools.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Maths\BoundingBox.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Maths\Line.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Maths\Matrix.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Maths\Matrix2.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Maths\Matrix3.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Maths\Matrix4.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Maths\Plane.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Maths\Polygon.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Maths\Segment.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Maths\Triangle.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Maths\Trihedron.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Maths\Vector2.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Maths\Vector3.cpp" />
+    <ClCompile Include="..\..\libs\libCore\Core\Maths\Vector4.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\libs\libCore\libCore.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Constants.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\CoreExceptions.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\EventUtils.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Image.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\sigslot.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\STLTools.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Tools.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Maths\BoundingBox.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Maths\Line.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Maths\Matrix.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Maths\Matrix2.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Maths\Matrix3.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Maths\Matrix4.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Maths\Plane.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Maths\Polygon.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Maths\Segment.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Maths\Triangle.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Maths\Trihedron.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Maths\Vector2.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Maths\Vector3.h" />
+    <ClInclude Include="..\..\libs\libCore\Core\Maths\Vector4.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\libs\libCore\libCore.rc" />
+  </ItemGroup>
+</Project>
