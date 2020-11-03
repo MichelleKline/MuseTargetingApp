@@ -1,4 +1,4 @@
 libs/
-apps/
 .vs/
 Debug_x32/
+tests/
