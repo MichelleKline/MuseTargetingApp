@@ -1,0 +1,39 @@
+
+#include <winres.h>
+//#include "IGTversion.rh"
+
+
+VS_VERSION_INFO VERSIONINFO
+//	FILEVERSION IGT_VERSION_NUM
+//	PRODUCTVERSION IGT_VERSION_NUM
+	FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+	FILEFLAGS 0x1L
+#else
+	FILEFLAGS 0x0L
+#endif
+	FILEOS 0x40004L
+	FILETYPE 0x2L
+	FILESUBTYPE 0x0L
+{
+	BLOCK "StringFileInfo"
+	{
+		BLOCK "000904b0"
+		{
+			//VALUE "CompanyName", "Image Guided Therapy"
+			//VALUE "FileDescription", IGT_BUILD_CONFIG
+			//VALUE "FileVersion", IGT_VERSION_STR
+			VALUE "InternalName", "libCore.dll"
+			VALUE "LegalCopyright", "(c) Image Guided Therapy"
+			VALUE "OriginalFilename", "libCore.dll"
+			VALUE "ProductName", "libCore"
+			//VALUE "ProductVersion", IGT_VERSION_STR
+			//VALUE "Comments", IGT_COMMENT
+		}
+	}
+
+	BLOCK "VarFileInfo"
+	{
+		VALUE "Translation", 0x9, 1200
+	}
+}
