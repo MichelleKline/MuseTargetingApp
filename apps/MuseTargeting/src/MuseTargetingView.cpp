@@ -1,7 +1,11 @@
+// :--------------------------------------------------------------------------:
+// : Copyright (C) Image Guided Therapy, Pessac, France. All Rights Reserved. :
+// :--------------------------------------------------------------------------:
 
 #include "MuseTargetingView.h"
 #include "MuseTargetingSettings.h"
 #include <QDebug>
+#include <QMessageBox>
 
 MuseTargetingView::MuseTargetingView(QWidget* parent)
     : QWidget(parent)
@@ -12,41 +16,77 @@ MuseTargetingView::MuseTargetingView(QWidget* parent)
 
     connect(ui.currentSettingButton, SIGNAL(clicked()), this, SLOT(enterButtonClicked()));
     connect(this, SIGNAL(updateCurrentSettings(MuseTargetingSettings*)), &m_model, SLOT(updateCurrentSettings(MuseTargetingSettings*)));
-    connect(this, SIGNAL(calculateFocus()), &m_model, SLOT(calcTheoreticalFocus()));
     connect(&m_model, SIGNAL(modelChangedSignal()), this, SLOT(refreshView()));
     connect(ui.calculateButton, SIGNAL(clicked()), this, SLOT(calculateButtonClicked()));
     connect(this, SIGNAL(updateDesiredFocus(core::Vector3)), &m_model, SLOT(updateDesiredFocus(core::Vector3)));
-    connect(this, SIGNAL(calculateSuggestedSettings()), &m_model, SLOT(calcSuggestedSettings()));
+    connect(ui.resetButton, SIGNAL(clicked()), this, SLOT(resetButtonClicked()));
 }
 
 MuseTargetingView::~MuseTargetingView()
-{
-    
-}
+{}
 
 void MuseTargetingView::enterButtonClicked() 
 {
-    // get the current system settings that the user has entered
+    // get the current system settings that the user has entered, validate,
     // and update the model
     MuseTargetingSettings* s = new MuseTargetingSettings;
+    // Psi
     QString currentPsiStr = ui.currentPsiLineEdit->text();
-    s->setValue("Psi", currentPsiStr.toDouble());
+    double currentPsi = currentPsiStr.toDouble();
+    if (currentPsi < m_model.getCurrentSettingMin("Psi") || currentPsi > m_model.getCurrentSettingMax("Psi"))
+    {
+        invalidMessage("Psi");
+        return;
+    }
+    s->setValue("Psi", currentPsi);
+    // Theta
     QString currentThetaStr = ui.currentThetaLineEdit->text();
-    s->setValue("Theta", currentThetaStr.toDouble());
+    double currentTheta = currentThetaStr.toDouble();
+    if (currentTheta < m_model.getCurrentSettingMin("Theta") || currentTheta > m_model.getCurrentSettingMax("Theta"))
+    {
+        invalidMessage("Theta");
+        return;
+    }
+    s->setValue("Theta", currentTheta);
+    // Alpha
     QString currentAlphaStr = ui.currentAlphaLineEdit->text();
-    s->setValue("Alpha", currentAlphaStr.toDouble());
+    double currentAlpha = currentAlphaStr.toDouble();
+    if (currentAlpha < m_model.getCurrentSettingMin("Alpha") || currentAlpha > m_model.getCurrentSettingMax("Alpha"))
+    {
+        invalidMessage("Alpha");
+        return;
+    }
+    s->setValue("Alpha", currentAlpha);
+    // L-Slider
     QString currentLSliderStr = ui.currentLSliderLineEdit->text();
-    s->setValue("LSlider", currentLSliderStr.toDouble());
+    double currentLSlider = currentLSliderStr.toDouble();
+    if (currentLSlider < m_model.getCurrentSettingMin("LSlider") || currentLSlider > m_model.getCurrentSettingMax("LSlider"))
+    {
+        invalidMessage("LSlider");
+        return;
+    }
+    s->setValue("LSlider", currentLSlider);
+    // X-Trolley
     QString currentXTrolleyStr = ui.currentXTrolleyLineEdit->text();
-    s->setValue("XTrolley", currentXTrolleyStr.toDouble());
+    double currentXTrolley = currentXTrolleyStr.toDouble();
+    if (currentXTrolley < m_model.getCurrentSettingMin("XTrolley") || currentXTrolley > m_model.getCurrentSettingMax("XTrolley"))
+    {
+        invalidMessage("XTrolley");
+        return;
+    }
+    s->setValue("XTrolley", currentXTrolley);
+    // Z-Trolley
     QString currentZTrolleyStr = ui.currentZTrolleyLineEdit->text();
-    s->setValue("ZTrolley", currentZTrolleyStr.toDouble());
-    // MMK fixme: ask Stéphanie
-    // delete s?
-
-    core::Vector3 v;
+    double currentZTrolley = currentZTrolleyStr.toDouble();
+    if (currentZTrolley < m_model.getCurrentSettingMin("ZTrolley") || currentZTrolley > m_model.getCurrentSettingMax("ZTrolley"))
+    {
+        invalidMessage("ZTrolley");
+        return;
+    }
+    s->setValue("ZTrolley", currentZTrolley);
+    
     emit updateCurrentSettings(s);
-    emit calculateFocus();
+    delete s; 
 }
 
 void MuseTargetingView::calculateButtonClicked() {
@@ -60,38 +100,48 @@ void MuseTargetingView::calculateButtonClicked() {
     df.z() = desiredZString.toDouble();
 
     emit updateDesiredFocus(df);
-    emit calculateSuggestedSettings();
+    //emit calculateSuggestedSettings();
+}
+
+void MuseTargetingView::resetButtonClicked() {
+    m_model.reset();
+}
+
+void MuseTargetingView::invalidMessage(QString settingName) {
+    QString msg = settingName + " setting limits: " + QString::number(m_model.getCurrentSettingMin(settingName)) +
+        " - " + QString::number(m_model.getCurrentSettingMax(settingName));
+    QMessageBox::warning(this, "Invalid Entry", msg);
 }
 
 void MuseTargetingView::refreshView() {
-    // update observed focus widgets
+    // display observed focus widgets
     core::Vector3 of = m_model.getObservedFocus();
     ui.observedXEdit->setText(QString::number(of.x()));
     ui.observedYEdit->setText(QString::number(of.y()));
     ui.observedZEdit->setText(QString::number(of.z()));
 
-    // update current settings 
+    // display current settings 
     MuseTargetingSettings* cs = m_model.getCurrentSettings();
-    ui.currentPsiLineEdit->setText(QString::number(cs->getSettingValue("Psi")));
-    ui.currentThetaLineEdit->setText(QString::number(cs->getSettingValue("Theta")));
-    ui.currentAlphaLineEdit->setText(QString::number(cs->getSettingValue("Alpha")));
-    ui.currentLSliderLineEdit->setText(QString::number(cs->getSettingValue("LSlider")));
-    ui.currentXTrolleyLineEdit->setText(QString::number(cs->getSettingValue("XTrolley")));
-    ui.currentZTrolleyLineEdit->setText(QString::number(cs->getSettingValue("ZTrolley")));
+    ui.currentPsiLineEdit->setText(QString::number(round(cs->getSettingValue("Psi"))));
+    ui.currentThetaLineEdit->setText(QString::number(round(cs->getSettingValue("Theta"))));
+    ui.currentAlphaLineEdit->setText(QString::number(round(cs->getSettingValue("Alpha"))));
+    ui.currentLSliderLineEdit->setText(QString::number(round(cs->getSettingValue("LSlider"))));
+    ui.currentXTrolleyLineEdit->setText(QString::number(round(cs->getSettingValue("XTrolley"))));
+    ui.currentZTrolleyLineEdit->setText(QString::number(round(cs->getSettingValue("ZTrolley"))));
     
-    // update calibration widgets <=== TEMP, during dev
+    // display calibration <=== TEMP, during dev
     core::Vector3 cf = m_model.getCalibration();
     ui.calibrationXEdit->setText(QString::number(cf.x()));
     ui.calibrationYEdit->setText(QString::number(cf.y()));
     ui.calibrationZEdit->setText(QString::number(cf.z()));
 
-    // update theoretical focus widgets <=== TEMP, during dev
+    // display theoretical focus <=== TEMP, during dev
     core::Vector3 tf = m_model.getTheoreticalFocus();
     ui.theoreticalXEdit->setText(QString::number(tf.x()));
     ui.theoreticalYEdit->setText(QString::number(tf.y()));
     ui.theoreticalZEdit->setText(QString::number(tf.z()));
 
-    // update desired focus
+    // display desired focus
     core::Vector3 df = m_model.getDesiredFocus();
     ui.desiredXEdit->setText(QString::number(df.x()));
     ui.desiredYEdit->setText(QString::number(df.y()));
@@ -99,10 +149,10 @@ void MuseTargetingView::refreshView() {
 
     // update suggested settings widgets
     MuseTargetingSettings* ss = m_model.getSuggestedSettings();
-    ui.suggestedPsiLineEdit->setText(QString::number(ss->getSettingValue("Psi")));
-    ui.suggestedThetaLineEdit->setText(QString::number(ss->getSettingValue("Theta")));
-    ui.suggestedAlphaLineEdit->setText(QString::number(ss->getSettingValue("Alpha")));
-    ui.suggestedLSliderLineEdit->setText(QString::number(ss->getSettingValue("LSlider")));
-    ui.suggestedXTrolleyLineEdit->setText(QString::number(ss->getSettingValue("XTrolley")));
-    ui.suggestedZTrolleyLineEdit->setText(QString::number(ss->getSettingValue("ZTrolley")));
+    ui.suggestedPsiLineEdit->setText(QString::number(round(ss->getSettingValue("Psi"))));
+    ui.suggestedThetaLineEdit->setText(QString::number(round(ss->getSettingValue("Theta"))));
+    ui.suggestedAlphaLineEdit->setText(QString::number(round(ss->getSettingValue("Alpha"))));
+    ui.suggestedLSliderLineEdit->setText(QString::number(round(ss->getSettingValue("LSlider"))));
+    ui.suggestedXTrolleyLineEdit->setText(QString::number(round(ss->getSettingValue("XTrolley"))));
+    ui.suggestedZTrolleyLineEdit->setText(QString::number(round(ss->getSettingValue("ZTrolley"))));
 }

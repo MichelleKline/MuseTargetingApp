@@ -1,12 +1,17 @@
-#include "MuseTargetingModel.h"
+// :--------------------------------------------------------------------------:
+// : Copyright (C) Image Guided Therapy, Pessac, France. All Rights Reserved. :
+// :--------------------------------------------------------------------------:
 
+#include "MuseTargetingModel.h"
+#include <QMessageBox>
 
 MuseTargetingModel::MuseTargetingModel(QWidget *parent) : QWidget(parent)
 {
     // temp during dev
-    m_observedFocus.x() = 0;
-    m_observedFocus.y() = -55;
-    m_observedFocus.z() = 0;
+    m_observedFocus.x() = -20;
+    m_observedFocus.y() = -18;
+    m_observedFocus.z() = -7;
+    m_isObservedFocusSet = true;
 
     // default theoretical focus
     m_theoreticalFocus.x() = 0;
@@ -18,29 +23,60 @@ MuseTargetingModel::MuseTargetingModel(QWidget *parent) : QWidget(parent)
     m_calibration.y() = 0;
     m_calibration.z() = 0;
 
-    // temp during dev
-    m_isCalibrated = true;
-
     // default desired focus
     m_desiredFocus.x() = 0;
     m_desiredFocus.y() = 0;
     m_desiredFocus.z() = 0;
-
 }
 
-void MuseTargetingModel::updateCurrentSettings(MuseTargetingSettings( *settings)){
+void MuseTargetingModel::updateCurrentSettings(MuseTargetingSettings(*settings)){
+    
     m_currentSettings.setValue("Psi",settings->getSettingValue("Psi"));
     m_currentSettings.setValue("Theta",settings->getSettingValue("Theta"));
     m_currentSettings.setValue("Alpha", settings->getSettingValue("Alpha"));
     m_currentSettings.setValue("LSlider", settings->getSettingValue("LSlider"));
     m_currentSettings.setValue("XTrolley", settings->getSettingValue("XTrolley"));
     m_currentSettings.setValue("ZTrolley", settings->getSettingValue("ZTrolley"));
+
+    calcTheoreticalFocus();
+    
+    // if not calibrated and observed focus is set, calibrate
+    if (m_isObservedFocusSet && !m_isCalibrated) 
+        calibrate();
+  
+    emit modelChangedSignal();
 }
 
 void MuseTargetingModel::updateDesiredFocus(core::Vector3 f) {
     m_desiredFocus.x() = f.x();
     m_desiredFocus.y() = f.y();
     m_desiredFocus.z() = f.z();
+
+    calcSuggestedSettings();
+
+    emit modelChangedSignal();
+}
+
+void MuseTargetingModel::calibrate() {
+    if (m_theoreticalFocus.x() != m_observedFocus.x()) {
+        if (m_theoreticalFocus.x() > 0) // L, if +LPH
+            m_calibration[0] = round(m_observedFocus.x() - abs(m_theoreticalFocus.x()));
+        else // R, if +LPH
+            m_calibration[0] = round(m_observedFocus.x() + abs(m_theoreticalFocus.x()));
+    }
+    if (m_theoreticalFocus.y() != m_observedFocus.y()) {
+        if (m_theoreticalFocus.y() > 0) // P, if +LPH
+            m_calibration[1] = round(m_observedFocus.y() - abs(m_theoreticalFocus.y()));
+        else // A, if +LPH
+            m_calibration[1] = round(m_observedFocus.y() + abs(m_theoreticalFocus.y()));
+    }
+    if (m_theoreticalFocus.z() != m_observedFocus.z()) {
+        if (m_theoreticalFocus.z() > 0) // H, if +LPH
+            m_calibration[2] = round(m_observedFocus.z() - abs(m_theoreticalFocus.z()));
+        else // F, if +LPH
+            m_calibration[2] = round(m_observedFocus.z() + abs(m_theoreticalFocus.z()));
+        m_isCalibrated = true;
+    }
 }
 
 void MuseTargetingModel::calcTheoreticalFocus(){
@@ -178,18 +214,16 @@ void MuseTargetingModel::calcTheoreticalFocus(){
     // MMK question: in Python MuseTargeting,
     // xyzRAH = ['R', 'P', 'H']  # Changed L to R
     // xyzRAHneg = ['L', 'A', 'F']  # Changed R to L
-    m_theoreticalFocus.x() = round(xyzf_scanner[0][0]);
+    m_theoreticalFocus.x() = -1 * round(xyzf_scanner[0][0]); // why?
     m_theoreticalFocus.y() = round(xyzf_scanner[1][0]);
     m_theoreticalFocus.z() = round(xyzf_scanner[2][0]);
-
-    emit modelChangedSignal();
 }
 
 void MuseTargetingModel::calcSuggestedSettings() {
     
     // dydz = (par.yfMRIwant - par.yoff - par.ycent)/ par.zfocus
     // par.calc_psi = math.degrees(math.asin((par.yfMRIwant - par.yoff - par.ycent)/ par.zfocus))
-    double suggestedPsi = round(radiansToDegrees(asin((m_desiredFocus.y() - m_calibration[1] - m_ycent) / m_zFocus)));
+    double suggestedPsi = radiansToDegrees(asin((m_desiredFocus.y() - m_calibration[1] - m_ycent) / m_zFocus));
     // R_calc_psi = np.array(
     //    [[1.0, 0.0, 0.0], [0.0, math.cos(math.radians(par.calc_psi)), math.sin(math.radians(par.calc_psi))],
     //    [0.0, -math.sin(math.radians(par.calc_psi)), math.cos(math.radians(par.calc_psi))]] )
@@ -208,20 +242,20 @@ void MuseTargetingModel::calcSuggestedSettings() {
     double suggestedLSlider = m_currentSettings.getSettingValue("LSlider");
     // xyzfMRIpsi1 = np.transpose(np.array([[-(par.xoff - par.calc_xtrolley), par.yoff, par.zoff - par.calc_ztrolley]]))
     std::vector<std::vector<double>> xyzfMRIpsi1;
-    if (m_isPersistSet) {
+    /*if (m_isPersistSet) {
         xyzfMRIpsi1 = {
             { -1.0 * m_calibration[0] - m_persistX },
             { m_calibration[1] },
             { m_calibration[2] - m_persistZ }
         };
-    }
-    else {
+    }*/
+    //else {
         xyzfMRIpsi1 = {
-            { -1.0 * m_calibration[0] - m_suggestedSettings.getSettingValue("XTrolley") },
+            { -1.0 * (m_calibration[0] - m_suggestedSettings.getSettingValue("XTrolley")) },
             { m_calibration[1] },
             { m_calibration[2] - m_suggestedSettings.getSettingValue("ZTrolley") }
         };
-    }
+    //}
     // xyzfMRIpsi2A = np.transpose(np.array([[x_cent, y_cent, par.calc_Lslider + z_cent]]))
     std::vector<std::vector<double>> xyzfMRIpsi2A{
         { m_xcent },
@@ -317,28 +351,43 @@ void MuseTargetingModel::calcSuggestedSettings() {
     // par.calc_ztrolley = ztest
     double xtest;
     double ztest;
-    if (!m_isPersistSet) {
+    //if (!m_isPersistSet) {
         xtest = m_suggestedSettings.getSettingValue("XTrolley") + dxyz[0];
         ztest = m_suggestedSettings.getSettingValue("ZTrolley") - dxyz[2];
-    }
-    else {
-        xtest = m_persistX + dxyz[0];
-        ztest = m_persistZ - dxyz[2];
-    }
-    double suggestedXTrolley = round(xtest);
-    double suggestedZTrolley = round(ztest);
-    if (!m_isPersistSet) {
+    //}
+    //else {
+        //xtest = m_persistX + dxyz[0];
+        //ztest = m_persistZ - dxyz[2];
+    //}
+    double suggestedXTrolley = xtest;
+    double suggestedZTrolley = ztest;
+    /*if (!m_isPersistSet) {
         m_persistX = xtest;
         m_persistZ = ztest;
         m_isPersistSet = true;
-    }
+    }*/
 
-    m_suggestedSettings.setValue("Psi", round(suggestedPsi));
-    m_suggestedSettings.setValue("Theta", round(suggestedTheta));
-    m_suggestedSettings.setValue("Alpha", round(suggestedAlpha));
-    m_suggestedSettings.setValue("LSlider", round(suggestedLSlider));
-    m_suggestedSettings.setValue("XTrolley", round(suggestedXTrolley));
-    m_suggestedSettings.setValue("ZTrolley", round(suggestedZTrolley));
+    m_suggestedSettings.setValue("Psi", suggestedPsi);
+    m_suggestedSettings.setValue("Theta", suggestedTheta);
+    m_suggestedSettings.setValue("Alpha", suggestedAlpha);
+    m_suggestedSettings.setValue("LSlider", suggestedLSlider);
+    m_suggestedSettings.setValue("XTrolley", suggestedXTrolley);
+    m_suggestedSettings.setValue("ZTrolley", suggestedZTrolley);
+}
+
+void MuseTargetingModel::reset() {
+    m_currentSettings.resetToDefault();
+    m_suggestedSettings.resetToDefault();
+    m_theoreticalFocus.x() = 0;
+    m_theoreticalFocus.y() = -55;
+    m_theoreticalFocus.z() = 0;
+    m_calibration.x() = 0;
+    m_calibration.y() = 0;
+    m_calibration.z() = 0;
+    m_isCalibrated = false;
+    m_desiredFocus.x() = 0;
+    m_desiredFocus.y() = 0;
+    m_desiredFocus.z() = 0;
 
     emit modelChangedSignal();
 }

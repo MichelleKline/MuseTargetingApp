@@ -12,7 +12,6 @@ MuseTargetingSettings::MuseTargetingSettings(QWidget *parent) : QWidget(parent)
     m_museSettings.push_back(psi);
     MuseTargetingDOF theta("Theta",0, 360, 0);
     m_museSettings.push_back(theta);
-
     MuseTargetingDOF alpha("Alpha", -10, 10, 0);
     m_museSettings.push_back(alpha);
     MuseTargetingDOF LSlider("LSlider", 0, 40, 20);
@@ -21,10 +20,13 @@ MuseTargetingSettings::MuseTargetingSettings(QWidget *parent) : QWidget(parent)
     m_museSettings.push_back(xTrolley);
     MuseTargetingDOF zTrolley("ZTrolley", -20, 20, 0);
     m_museSettings.push_back(zTrolley);
-
 }
 
 void MuseTargetingSettings::addSetting(QString name, double min, double max, double value){
+    // TO DO: check if name already exists in m_museSettings
+    // TO DO: ensure value is valid (>=min && <=max
+    // TO DO: ensure min <= max
+
     MuseTargetingDOF DOF(name, min, max, value);
     m_museSettings.push_back(DOF);
 }
@@ -35,6 +37,8 @@ void MuseTargetingSettings::addSetting(QString name, double min, double max){
 }
 
 void MuseTargetingSettings::setValue(QString settingName, double val){
+    // TO DO: ensure value is valid
+    // TO DO: ensure name is found in m_museSettings
     for (unsigned i = 0; i < m_museSettings.size(); ++i)
     {
         if (!m_museSettings[i].getName().compare(settingName)){
@@ -77,3 +81,12 @@ double MuseTargetingSettings::getSettingValue(QString settingName){
     return -999;  // MMK fixme - what to return if no match found?
 }
 
+void MuseTargetingSettings::resetToDefault() {
+    // these are the default Muse System Settings
+    setValue("Psi", 0);
+    setValue("Theta", 0);
+    setValue("Alpha", 0);
+    setValue("LSlider", 20);
+    setValue("XTrolley", 0);
+    setValue("ZTrolley", 0);
+}

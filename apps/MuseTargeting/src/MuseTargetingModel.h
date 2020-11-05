@@ -4,6 +4,10 @@
 #include "MuseTargetingSettings.h"
 #include "../../libs/libCore/Core/Maths/Vector3.h"
 #include <vector>
+// :--------------------------------------------------------------------------:
+// : Copyright (C) Image Guided Therapy, Pessac, France. All Rights Reserved. :
+// :--------------------------------------------------------------------------:
+
 #include <QWidget>
 
 # define M_PI 3.14159265358979323846  /* pi */
@@ -18,8 +22,11 @@ public:
     MuseTargetingSettings* getSuggestedSettings() { return &m_suggestedSettings; }
     core::Vector3 getObservedFocus() { return m_observedFocus; }
     core::Vector3 getCalibration() { return m_calibration; }
-    core::Vector3 getTheoreticalFocus() { return m_theoreticalFocus; };
+    core::Vector3 getTheoreticalFocus() { return m_theoreticalFocus; }
     core::Vector3 getDesiredFocus() { return m_desiredFocus; }
+    double getCurrentSettingMin(QString name){ return m_currentSettings.getSettingMin(name); }
+    double getCurrentSettingMax(QString name){ return m_currentSettings.getSettingMax(name); }
+    void reset();
 
 signals:
     void modelChangedSignal();
@@ -27,21 +34,21 @@ signals:
 private slots:
     void updateCurrentSettings(MuseTargetingSettings *s);
     void updateDesiredFocus(core::Vector3 f);
-    void calcTheoreticalFocus();
-    void calcSuggestedSettings();
     
 private:
-    MuseTargetingSettings m_currentSettings;
-    MuseTargetingSettings m_suggestedSettings;
-    core::Vector3 m_observedFocus;
+    MuseTargetingSettings m_currentSettings;    // user-provided Muse System settings
+    bool m_areCurrSettingsRegistered = false;
+    core::Vector3 m_observedFocus;              // Thermoguide-provided observed focus
+    bool m_isObservedFocusSet = false;
     core::Vector3 m_calibration;
+    bool m_isCalibrated = false;
     core::Vector3 m_theoreticalFocus;
     core::Vector3 m_desiredFocus;
-    bool m_isCalibrated = false;
-
-    double m_persistZ;            // MMK Python reuses initial ZTrolley on subsequent calcs...
-    double m_persistX;            // MMK Python reuses initial XTrolley on subsequent calcs...
-    bool m_isPersistSet = false;  // MMK
+    MuseTargetingSettings m_suggestedSettings;
+    
+    void calcSuggestedSettings();
+    void calcTheoreticalFocus();
+    void calibrate();
 
     /** other Muse System variables from MuseTargeting Python */
     double m_xFocus = 0.0;    // default focus of transducer?

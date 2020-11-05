@@ -10,7 +10,7 @@
 #include <vector>
 
 /**
-* @brief Model class for Muse Targeting. Stores degrees of freedom for Muse System.
+* @brief Model class for Muse Targeting. Stores vector of degrees of freedom (MuseTargetingDOF) for Muse System.
 */
 class MuseTargetingSettings : public QWidget
 {
@@ -40,7 +40,9 @@ public:
     /** The current value for this degree of freedom */
     double getSettingValue(QString settingName);
 
-    size_t getNumSettings(){ return m_museSettings.size(); }
+    size_t getNumSettings() { return m_museSettings.size(); }
+
+    void resetToDefault();
 
     // MMK need check to ensure that no duplication of setting name
     // MMK how to handle value that is not >= min and <= max

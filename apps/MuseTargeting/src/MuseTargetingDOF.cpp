@@ -1,3 +1,7 @@
+// :--------------------------------------------------------------------------:
+// : Copyright (C) Image Guided Therapy, Pessac, France. All Rights Reserved. :
+// :--------------------------------------------------------------------------:
+
 #include "MuseTargetingDOF.h"
 
 MuseTargetingDOF::MuseTargetingDOF(QString name, double lowerLimit, double upperLimit, double value){

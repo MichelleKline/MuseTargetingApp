@@ -1,3 +1,7 @@
+// :--------------------------------------------------------------------------:
+// : Copyright (C) Image Guided Therapy, Pessac, France. All Rights Reserved. :
+// :--------------------------------------------------------------------------:
+
 #ifndef MUSETARGETINGVIEW_H
 #define MUSETARGETINGVIEW_H
 
@@ -19,15 +23,15 @@ private slots:
     void enterButtonClicked();
     void refreshView();
     void calculateButtonClicked();
+    void resetButtonClicked();
 
 signals:
     void updateCurrentSettings(MuseTargetingSettings* s);
-    void calculateFocus();
     void updateDesiredFocus(core::Vector3 df);
-    void calculateSuggestedSettings();
 
 private:
     Ui::MuseTargetingViewClass ui;
     MuseTargetingModel m_model;
+    void invalidMessage(QString settingName);
 };
 #endif // MUSETARGETINGVIEW_H

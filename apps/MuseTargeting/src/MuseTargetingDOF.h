@@ -1,3 +1,7 @@
+// :--------------------------------------------------------------------------:
+// : Copyright (C) Image Guided Therapy, Pessac, France. All Rights Reserved. :
+// :--------------------------------------------------------------------------:
+
 #ifndef MUSETARGETINGDOF_H
 #define MUSETARGETINGDOF_H
 
