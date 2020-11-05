@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MuseTargetingView</string>
+   <string>Muse System Targeting</string>
   </property>
   <widget class="QGroupBox" name="currentSettingsGroup">
    <property name="geometry">

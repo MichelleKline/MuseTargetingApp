@@ -33,6 +33,9 @@
     <QtMoc Include="..\..\apps\MuseTargeting\src\MuseTargetingModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="..\..\apps\MuseTargeting\src\PseudoTGDriver.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="..\..\apps\MuseTargeting\src\MuseTargetingView.qrc">
@@ -41,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="..\..\apps\MuseTargeting\src\MuseTargetingView.ui">
+      <Filter>Resource Files</Filter>
+    </QtUic>
+    <QtUic Include="..\..\apps\MuseTargeting\src\PseudoTGDriver.ui">
       <Filter>Resource Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -58,6 +64,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\apps\MuseTargeting\src\MuseTargetingModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\apps\MuseTargeting\src\PseudoTGDriver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

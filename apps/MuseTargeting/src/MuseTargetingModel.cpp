@@ -7,11 +7,10 @@
 
 MuseTargetingModel::MuseTargetingModel(QWidget *parent) : QWidget(parent)
 {
-    // temp during dev
-    m_observedFocus.x() = -20;
-    m_observedFocus.y() = -18;
-    m_observedFocus.z() = -7;
-    m_isObservedFocusSet = true;
+    // default observed focus
+    m_observedFocus.x() = 0;
+    m_observedFocus.y() = 0;
+    m_observedFocus.z() = 0;
 
     // default theoretical focus
     m_theoreticalFocus.x() = 0;
@@ -29,7 +28,7 @@ MuseTargetingModel::MuseTargetingModel(QWidget *parent) : QWidget(parent)
     m_desiredFocus.z() = 0;
 }
 
-void MuseTargetingModel::updateCurrentSettings(MuseTargetingSettings(*settings)){
+void MuseTargetingModel::updateCurrentSettings(MuseTargetingSettings* settings){
     
     m_currentSettings.setValue("Psi",settings->getSettingValue("Psi"));
     m_currentSettings.setValue("Theta",settings->getSettingValue("Theta"));
@@ -53,6 +52,25 @@ void MuseTargetingModel::updateDesiredFocus(core::Vector3 f) {
     m_desiredFocus.z() = f.z();
 
     calcSuggestedSettings();
+
+    emit modelChangedSignal();
+}
+
+void MuseTargetingModel::updateObservedFocus(core::Vector3 f) {
+    m_observedFocus.x() = f.x();
+    m_observedFocus.y() = f.y();
+    m_observedFocus.z() = f.z();
+    m_isObservedFocusSet = true;
+
+    // resetting observed focus automatically resets calibration
+    m_calibration.x() = 0;
+    m_calibration.y() = 0;
+    m_calibration.z() = 0;
+
+    calcTheoreticalFocus();
+
+    // recalibrate
+    calibrate();
 
     emit modelChangedSignal();
 }

@@ -51,12 +51,17 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\libs\libCore;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\libs\libCore;..\..\apps\MuseTargeting\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>Debug_x32\_output_\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libCore_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\apps\MuseTargeting\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'" Label="QtSettings">
     <QtInstall>D:\Qt\5.15.1\msvc2019</QtInstall>
@@ -105,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="..\..\apps\MuseTargeting\src\MuseTargetingView.ui" />
+    <QtUic Include="..\..\apps\MuseTargeting\src\PseudoTGDriver.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\apps\MuseTargeting\src\MuseTargeting.cpp" />
@@ -112,9 +118,11 @@
     <ClCompile Include="..\..\apps\MuseTargeting\src\MuseTargetingModel.cpp" />
     <ClCompile Include="..\..\apps\MuseTargeting\src\MuseTargetingSettings.cpp" />
     <ClCompile Include="..\..\apps\MuseTargeting\src\MuseTargetingView.cpp" />
+    <ClCompile Include="..\..\apps\MuseTargeting\src\PseudoTGDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\apps\MuseTargeting\src\MuseTargetingDOF.h" />
+    <QtMoc Include="..\..\apps\MuseTargeting\src\PseudoTGDriver.h" />
     <QtMoc Include="..\..\apps\MuseTargeting\src\MuseTargetingModel.h" />
     <QtMoc Include="..\..\apps\MuseTargeting\src\MuseTargetingSettings.h" />
   </ItemGroup>

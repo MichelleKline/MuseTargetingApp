@@ -24,10 +24,12 @@ private slots:
     void refreshView();
     void calculateButtonClicked();
     void resetButtonClicked();
+    void receiveObservedFocus(core::Vector3 of);
 
 signals:
     void updateCurrentSettings(MuseTargetingSettings* s);
     void updateDesiredFocus(core::Vector3 df);
+    void sendObservedFocus(core::Vector3 of);
 
 private:
     Ui::MuseTargetingViewClass ui;

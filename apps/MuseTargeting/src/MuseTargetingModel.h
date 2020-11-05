@@ -32,6 +32,7 @@ signals:
     void modelChangedSignal();
 
 private slots:
+    void updateObservedFocus(core::Vector3 f);
     void updateCurrentSettings(MuseTargetingSettings *s);
     void updateDesiredFocus(core::Vector3 f);
     

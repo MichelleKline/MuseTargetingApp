@@ -20,6 +20,7 @@ MuseTargetingView::MuseTargetingView(QWidget* parent)
     connect(ui.calculateButton, SIGNAL(clicked()), this, SLOT(calculateButtonClicked()));
     connect(this, SIGNAL(updateDesiredFocus(core::Vector3)), &m_model, SLOT(updateDesiredFocus(core::Vector3)));
     connect(ui.resetButton, SIGNAL(clicked()), this, SLOT(resetButtonClicked()));
+    connect(this, SIGNAL(sendObservedFocus(core::Vector3)), &m_model, SLOT(updateObservedFocus(core::Vector3)));
 }
 
 MuseTargetingView::~MuseTargetingView()
@@ -100,7 +101,10 @@ void MuseTargetingView::calculateButtonClicked() {
     df.z() = desiredZString.toDouble();
 
     emit updateDesiredFocus(df);
-    //emit calculateSuggestedSettings();
+}
+
+void MuseTargetingView::receiveObservedFocus(core::Vector3 of) {
+    emit sendObservedFocus(of);
 }
 
 void MuseTargetingView::resetButtonClicked() {
