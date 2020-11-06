@@ -12,6 +12,7 @@ MuseTargetingView::MuseTargetingView(QWidget* parent)
 {
     ui.setupUi(this);
 
+    // Populate the widgets with the model. Initially, the model contains all default values.
     refreshView();
 
     connect(ui.currentSettingButton, SIGNAL(clicked()), this, SLOT(enterButtonClicked()));
@@ -27,8 +28,7 @@ MuseTargetingView::~MuseTargetingView()
 {}
 
 void MuseTargetingView::enterButtonClicked() {
-    // get the current system settings that the user has entered, validate,
-    // and update the model
+    // get the current system settings that the user has entered and validate
     MuseTargetingSettings* s = new MuseTargetingSettings;
     // Psi
     QString currentPsiStr = ui.currentPsiLineEdit->text();
@@ -84,9 +84,9 @@ void MuseTargetingView::enterButtonClicked() {
         return;
     }
     s->setValue("ZTrolley", currentZTrolley);
-    
+    // then send to the model
     emit updateCurrentSettings(s);
-    delete s; 
+    delete s; // MMK fixme. Necessary?
 }
 
 void MuseTargetingView::calculateButtonClicked() {
@@ -98,11 +98,13 @@ void MuseTargetingView::calculateButtonClicked() {
     df.x() = desiredXString.toDouble();
     df.y() = desiredYString.toDouble();
     df.z() = desiredZString.toDouble();
-
+    // and sent to the model
     emit updateDesiredFocus(df);
 }
 
 void MuseTargetingView::receiveObservedFocus(core::Vector3 of) {
+    // receive observed focus from Thermoguide. Just pass it right 
+    // along to the model.
     emit sendObservedFocus(of);
 }
 
@@ -111,6 +113,7 @@ void MuseTargetingView::resetButtonClicked() {
 }
 
 void MuseTargetingView::invalidMessage(QString settingName) {
+    // display popup dialog showing which setting is out of range, and the acceptible range of values for that setting.
     QString msg = settingName + " setting limits: " + QString::number(m_model.getCurrentSettingMin(settingName)) +
         " - " + QString::number(m_model.getCurrentSettingMax(settingName));
     QMessageBox::warning(this, "Invalid Entry", msg);
@@ -131,7 +134,7 @@ void MuseTargetingView::refreshView() {
     ui.currentLSliderLineEdit->setText(QString::number(round(cs->getSettingValue("LSlider"))));
     ui.currentXTrolleyLineEdit->setText(QString::number(round(cs->getSettingValue("XTrolley"))));
     ui.currentZTrolleyLineEdit->setText(QString::number(round(cs->getSettingValue("ZTrolley"))));
-    
+
     // display calibration <=== TEMP, during dev
     core::Vector3 cf = m_model.getCalibration();
     ui.calibrationXEdit->setText(QString::number(cf.x()));

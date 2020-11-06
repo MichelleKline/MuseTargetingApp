@@ -8,8 +8,10 @@
 #include "MuseTargetingView.h"
 
 /**
-* Small app to act as a stand-in for Thermoguide during testing and dev. Allows user to
-* send observed focus to Muse Targeting app.
+* Qwidget class to display a single window to act as a stand-in for Thermoguide during testing and dev. 
+* *
+* This window allows user to enter observed focus x, y, and z, and to click a button which will send
+* the observed focus to Muse Targeting window.
 */
 class PseudoTGDriver : public QWidget
 {

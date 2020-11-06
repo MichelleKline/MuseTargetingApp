@@ -34,5 +34,6 @@ void PseudoTGDriver::sendButtonClicked() {
     of.y() = observedYString.toDouble();
     of.z() = observedZString.toDouble();
 
+    // send focus to MuseTargetingView
     emit sendObservedFocus(of);
 }

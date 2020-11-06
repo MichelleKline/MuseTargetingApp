@@ -33,10 +33,13 @@ public:
 
     /** Return all of the degrees of freedom defined for this settings object */
     std::vector<MuseTargetingDOF> getSettings();
+
     /** The minimum allowable value for this degree of freedom */
     double getSettingMin(QString settingName);
+
     /** The maximum allowable value for this degree of freedom */
     double getSettingMax(QString settingName);
+
     /** The current value for this degree of freedom */
     double getSettingValue(QString settingName);
 
@@ -47,12 +50,6 @@ public:
     // MMK need check to ensure that no duplication of setting name
     // MMK how to handle value that is not >= min and <= max
     // MMK how to handle min > max
-
-public slots:
-    //void testSlot(int n);
-
-signals:
-    //    bool emitSignalWhenChanged();
 
 private:
     /** This is the vector of degrees of freedom that describe this settings object */
