@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Michelle\source\repos\MuseTargeting\apps\MuseTargetingUnitTests\_build_\vs2019_x32\CMakeFiles\d45ac300a4faf1da3168b711f98212d1\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{2907A2ED-42B0-3E96-8F44-00F01A3D30FB}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

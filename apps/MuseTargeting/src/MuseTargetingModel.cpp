@@ -5,8 +5,7 @@
 #include "MuseTargetingModel.h"
 #include <QMessageBox>
 
-MuseTargetingModel::MuseTargetingModel(QWidget *parent) : QWidget(parent)
-{
+MuseTargetingModel::MuseTargetingModel(QWidget *parent) : QWidget(parent) {
     // default observed focus
     m_observedFocus.x() = 0;
     m_observedFocus.y() = 0;
@@ -28,7 +27,7 @@ MuseTargetingModel::MuseTargetingModel(QWidget *parent) : QWidget(parent)
     m_desiredFocus.z() = 0;
 }
 
-void MuseTargetingModel::updateCurrentSettings(MuseTargetingSettings* settings){
+void MuseTargetingModel::updateCurrentSettings(MuseTargetingSettings* settings) {
     
     m_currentSettings.setValue("Psi",settings->getSettingValue("Psi"));
     m_currentSettings.setValue("Theta",settings->getSettingValue("Theta"));
@@ -57,20 +56,14 @@ void MuseTargetingModel::updateDesiredFocus(core::Vector3 f) {
 }
 
 void MuseTargetingModel::updateObservedFocus(core::Vector3 f) {
+
+    /** To avoid calculations getting out of sync, reset all */
+    reset();
+
     m_observedFocus.x() = f.x();
     m_observedFocus.y() = f.y();
     m_observedFocus.z() = f.z();
     m_isObservedFocusSet = true;
-
-    // resetting observed focus automatically resets calibration
-    m_calibration.x() = 0;
-    m_calibration.y() = 0;
-    m_calibration.z() = 0;
-
-    calcTheoreticalFocus();
-
-    // recalibrate
-    calibrate();
 
     emit modelChangedSignal();
 }

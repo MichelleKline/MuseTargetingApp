@@ -1,3 +1,7 @@
+// :--------------------------------------------------------------------------:
+// : Copyright (C) Image Guided Therapy, Pessac, France. All Rights Reserved. :
+// :--------------------------------------------------------------------------:
+
 #ifndef MUSETARGETINGMODEL_H
 #define MUSETARGETINGMODEL_H
 
@@ -23,9 +27,10 @@ public:
     core::Vector3 getObservedFocus() { return m_observedFocus; }
     core::Vector3 getCalibration() { return m_calibration; }
     core::Vector3 getTheoreticalFocus() { return m_theoreticalFocus; }
-    core::Vector3 getDesiredFocus() { return m_desiredFocus; }
-    double getCurrentSettingMin(QString name){ return m_currentSettings.getSettingMin(name); }
-    double getCurrentSettingMax(QString name){ return m_currentSettings.getSettingMax(name); }
+    core::Vector3 getDesiredFocus() { return m_desiredFocus; 
+    }
+    double getCurrentSettingMin(QString name) { return m_currentSettings.getSettingMin(name); }
+    double getCurrentSettingMax(QString name) { return m_currentSettings.getSettingMax(name); }
     void reset();
 
 signals:

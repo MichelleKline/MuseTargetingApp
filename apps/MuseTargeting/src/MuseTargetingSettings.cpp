@@ -4,8 +4,7 @@
 
 #include "MuseTargetingSettings.h"
 
-MuseTargetingSettings::MuseTargetingSettings(QWidget *parent) : QWidget(parent)
-{
+MuseTargetingSettings::MuseTargetingSettings(QWidget *parent) : QWidget(parent) {
     // these are the default Muse System Settings
     // TO DO: allow to be defined using input file?
     MuseTargetingDOF psi("Psi", 0, 40, 0);
@@ -31,37 +30,40 @@ void MuseTargetingSettings::addSetting(QString name, double min, double max, dou
     m_museSettings.push_back(DOF);
 }
 
-void MuseTargetingSettings::addSetting(QString name, double min, double max){
+void MuseTargetingSettings::addSetting(QString name, double min, double max) {
     MuseTargetingDOF DOF(name, min, max);
     m_museSettings.push_back(DOF);
 }
 
-void MuseTargetingSettings::setValue(QString settingName, double val){
+void MuseTargetingSettings::setValue(QString settingName, double val) {
     // TO DO: ensure value is valid
     // TO DO: ensure name is found in m_museSettings
     for (unsigned i = 0; i < m_museSettings.size(); ++i)
     {
-        if (!m_museSettings[i].getName().compare(settingName)){
+        if (!m_museSettings[i].getName().compare(settingName)) 
+        {
             m_museSettings[i].setValue(val);
             return;
         }
     }
 }
 
-std::vector<MuseTargetingDOF> MuseTargetingSettings::getSettings(){
+std::vector<MuseTargetingDOF> MuseTargetingSettings::getSettings() {
     return m_museSettings;
 }
 
-double MuseTargetingSettings::getSettingMin(QString settingName){
+double MuseTargetingSettings::getSettingMin(QString settingName) {
     for (unsigned i = 0; i < m_museSettings.size(); ++i)
     {
         if (!m_museSettings[i].getName().compare(settingName))
+        {
             return m_museSettings[i].getMin();
+        }
     }
     return -999;  // MMK fixme - what to return if no match found?
 }
 
-double MuseTargetingSettings::getSettingMax(QString settingName){
+double MuseTargetingSettings::getSettingMax(QString settingName) {
     for (unsigned i = 0; i < m_museSettings.size(); ++i)
     {
         if (!m_museSettings[i].getName().compare(settingName))
@@ -70,11 +72,12 @@ double MuseTargetingSettings::getSettingMax(QString settingName){
     return -999;  // MMK fixme - what to return if no match found?
 }
 
-double MuseTargetingSettings::getSettingValue(QString settingName){
+double MuseTargetingSettings::getSettingValue(QString settingName) {
     for (unsigned i = 0; i < m_museSettings.size(); ++i)
     {
         QString temp = m_museSettings[i].getName();
-        if (!m_museSettings[i].getName().compare(settingName)){
+        if (!m_museSettings[i].getName().compare(settingName))
+        {
             return m_museSettings[i].getValue();
         }
     }

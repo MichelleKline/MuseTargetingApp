@@ -7,7 +7,8 @@
 
 #include <QWidget>
 
-class MuseTargetingDOF {
+class MuseTargetingDOF 
+{
 
 public:
     /**
@@ -37,15 +38,15 @@ public:
 
     /** Define (set up) this degree of freedom with name, min and max */
     void define(QString name, double lowerLimit, double upperLimit);
-    void setName(QString name);
-    void setMax(double upperLimit);
-    void setMin(double lowerLimit);
-    bool setValue(double value);
+    void setName(QString name) { m_name = name; }
+    void setMax(double upperLimit) { m_upperLimit = upperLimit; }
+    void setMin(double lowerLimit) { lowerLimit = lowerLimit; }
+    void setValue(double value) { m_value = value; }
 
-    QString getName();
-    double getMax();
-    double getMin();
-    double getValue();
+    QString getName() { return m_name; }
+    double getMax() { return m_upperLimit; }
+    double getMin() { return m_lowerLimit; }
+    double getValue() { return m_value; }
 
 signals:
 

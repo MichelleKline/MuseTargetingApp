@@ -26,8 +26,7 @@ MuseTargetingView::MuseTargetingView(QWidget* parent)
 MuseTargetingView::~MuseTargetingView()
 {}
 
-void MuseTargetingView::enterButtonClicked() 
-{
+void MuseTargetingView::enterButtonClicked() {
     // get the current system settings that the user has entered, validate,
     // and update the model
     MuseTargetingSettings* s = new MuseTargetingSettings;
