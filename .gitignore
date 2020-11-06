@@ -1,3 +1,7 @@
 .vs/
 Debug_x32/
-tests/
+CMakeFiles/
+Debug/
+museTargetingUnitTests.dir/
+museTargetingUnitTests_autogen/
+Win32/
