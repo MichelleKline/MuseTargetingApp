@@ -1,0 +1,52 @@
+
+## Requirements
+
+VTK1
+The library shall provide a function to extract a slice from a volume.
+
+VTK2
+The library shall resample one volume to match the voxel resolution of a second volume.
+
+VTK3
+The library shall resample one volume to match the position and orientation of a second volume.
+
+VTK4
+The library shall be able to create a volume bigger than the initial one using a given value for "not found" pixels (padding).
+
+VTK5
+The library shall be able to handle voxel represention with SHORT, FLOAT, BOOL and UNSIGNED SHORT .
+
+#VTK6
+#The library shall have one or more fast interpolation method
+
+## Tests
+
+TEST1 vtk.extraction [REQ1]
+Create a volume and extract a slice in another orientation
+
+TEST2 vtk.padding [REQ4]
+Create a volume smaller than the destination volume and check pixels are filled with a given value
+
+TEST3 vtk.resolution [REQ3]
+Create a volume and extract a slice in another resolution
+
+TEST4 vtk.reslicePosition [REQ2]
+Create a volume and extract a slice in another position
+
+TEST5 vtk.resliceOrientation [REQ2]
+Create a volume and extract a slice in another orientation
+
+TEST6 vtk.voxelType [REQ5]
+Create a volume with voxels represented as short and extract a slice in another orientation
+
+TEST6 vtk.voxelType [REQ5]
+Create a volume with voxels represented as float and extract a slice in another orientation
+
+TEST6 vtk.voxelType [REQ5]
+Create a volume with voxels represented as bool and extract a slice in another orientation
+
+TEST6 vtk.voxelType [REQ5]
+Create a volume with voxels represented as unsigned short and extract a slice in another orientation
+
+TEST7 vtk.matrix [REQ3] [REQ2]
+Create matrix object to represent the position and orientation of the volume

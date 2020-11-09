@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\_build_\vs2019_x32\libCore_autogen\mocs_compilation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\libCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Constants.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\CoreExceptions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\STLTools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Tools.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\BoundingBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Line.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Matrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Matrix2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Matrix3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Matrix4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Plane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Polygon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Segment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Triangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Trihedron.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Vector2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Vector3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Vector4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\libCore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\CoreExceptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\EventUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\sigslot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\STLTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Tools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\BoundingBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Line.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Matrix2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Matrix3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Matrix4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Plane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Polygon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Segment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Triangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Trihedron.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Vector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Vector3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\libs\libCore\Core\Maths\Vector4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Michelle\source\repos\MuseTargeting\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{FF8BBC98-3414-3416-B8B0-FA574CE4FC87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{FA0D12F2-4B38-3C35-AEAB-F8C7B797A55D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

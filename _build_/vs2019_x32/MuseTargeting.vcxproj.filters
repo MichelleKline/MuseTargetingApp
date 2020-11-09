@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\_build_\vs2019_x32\MuseTargeting_autogen\mocs_compilation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\src\MuseTargeting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\src\PseudoTGDriver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\src\MuseTargetingView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\src\MuseTargetingModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\src\MuseTargetingSettings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Michelle\source\repos\MuseTargeting\src\MuseTargetingDOF.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\src\PseudoTGDriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\src\MuseTargetingView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\src\MuseTargetingModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\src\MuseTargetingSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Michelle\source\repos\MuseTargeting\src\MuseTargetingDOF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Michelle\source\repos\MuseTargeting\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Michelle\source\repos\MuseTargeting\src\PseudoTGDriver.ui" />
+    <None Include="C:\Users\Michelle\source\repos\MuseTargeting\src\MuseTargetingView.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{FF8BBC98-3414-3416-B8B0-FA574CE4FC87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{FA0D12F2-4B38-3C35-AEAB-F8C7B797A55D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
